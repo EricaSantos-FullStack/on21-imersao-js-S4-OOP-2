@@ -5,28 +5,42 @@ Essa classe terá dos metódos, um para criar o post que incrementará a quantid
 o outro obter o número de post criados. 
 
 Observação: Não criaremos a implementação da adição do post; */
+  class Author extends User {
 
-class User {
-    #password;
-    
+    postsList
+    #postsQtd
   
-    constructor(name, userName, email, password) {
-      this.nome = name;
-      this.username = userName;
-      this.email = email;
-      this.#password = password;
+    constructor(email, password) {
+      super(email, password)
+  
+      this.#postsQtd = 0
+      this.postsList = []
     }
   
-    login(email, password) {
-      if (email === this.email && password === this.#password) {
-        return `Login Realizado!`;
-      } else {
-        return `Email e senha não estão corretos`;
-      }
+    createPost(post){
+      this.postsList.push(post)
+      this.#postsQtd++    
     }
   
-    setPassword(novaSenha) {
-      this.#password = novaSenha;
-      return `Sua senha foi alterada!`;
+    get postQtd(){
+      return `${this.#postsQtd} post(s) created.` 
     }
+  
+    get postsList(){
+      return `Author posts: ${this.postsList} `
+    }
+  
   }
+  
+  const author = new Author('any_email@mail.com', '123456')
+  
+  author.createPost('First Post')
+  // ------------------------------------------------------
+  author.postQtd // 1 post(s) created.
+  author.postsList // Author posts: First Post 
+  // ------------------------------------------------------
+  author.createPost('Second Post')
+  // ------------------------------------------------------
+  author.postQtd // 2 post(s) created.
+  author.postsList // Author posts: First Post,Second Post
+  
